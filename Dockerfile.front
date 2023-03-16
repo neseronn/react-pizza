@@ -1,0 +1,18 @@
+FROM node:18-alpine
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+ARG REACT_APP_JSONSERVER_URL=http://127.0.0.1:3001/
+ENV REACT_APP_JSONSERVER_URL=${REACT_APP_JSONSERVER_URL}
+ARG PORT=3010
+ENV PORT=${PORT}
+
+WORKDIR /opt/app
+COPY . ./
+
+
+RUN npm install
+RUN npm install react-scripts
+
+EXPOSE ${PORT}
+
+CMD ["npm", "run", "start"]
