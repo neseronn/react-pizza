@@ -86,6 +86,6 @@ PizzaBlock.defaultProps = {
   price: 0,
   types: [],
   sizes: [],
-}
+};
 
 export default PizzaBlock;
