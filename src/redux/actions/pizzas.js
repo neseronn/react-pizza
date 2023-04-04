@@ -5,9 +5,13 @@ export const setLoaded = (val) => ({
   payload: val,
 });
 
-export const fetchPizzas = () => (dispatch) => {
-  dispatch(setLoaded(false));
-  axios.get(process.env.REACT_APP_JSONSERVER_URL).then(({ data }) => {
+export const fetchPizzas = (category, sortBy) => (dispatch) => {
+  dispatch({
+    type: 'SET_LOADED',
+    payload: false,
+  });
+  
+  axios.get(process.env.REACT_APP_JSONSERVER_URL + `?${category !== null ? `category=${category}` : ''}&_sort=${sortBy.type}&_order=${sortBy.order}`).then(({ data }) => {
     dispatch(setPizzas(data));
   });
 };
