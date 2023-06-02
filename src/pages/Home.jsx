@@ -62,7 +62,7 @@ function Home() {
               <PizzaBlock
                 onClickAddPizza={handleAddPizzaToCart}
                 key={obj.id}
-                isLoading={true}
+                addedCount={cartItems[obj.id] && cartItems[obj.id].length}
                 {...obj}
               />
             ))
