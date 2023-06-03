@@ -11,7 +11,7 @@ export const fetchPizzas = (category, sortBy) => (dispatch) => {
     payload: false,
   });
   
-  axios.get(process.env.REACT_APP_JSONSERVER_URL + `?${category !== null ? `category=${category}` : ''}&_sort=${sortBy.type}&_order=${sortBy.order}`).then(({ data }) => {
+  axios.get(`/pizzas?${category !== null ? `category=${category}` : ''}&_sort=${sortBy.type}&_order=${sortBy.order}`).then(({ data }) => {
     dispatch(setPizzas(data));
   });
 };
