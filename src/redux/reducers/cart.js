@@ -21,7 +21,10 @@ const cart = (state = initialState, action) => {
         },
       };
 
-      const allPizzas = [].concat.apply([], Object.values(newItems).map(obj => obj.items));
+      const allPizzas = [].concat.apply(
+        [],
+        Object.values(newItems).map((obj) => obj.items)
+      );
       const totalPrice = getTotalPrice(allPizzas);
 
       return {
@@ -31,6 +34,12 @@ const cart = (state = initialState, action) => {
         totalPrice,
       };
     }
+    case 'CLEAR_CART':
+      return {
+        totalPrice: 0,
+        totalCount: 0,
+        items: {},
+      };
     default:
       return state;
   }
