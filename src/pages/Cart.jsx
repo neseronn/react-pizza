@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import { CartItem } from '../components/';
-import { clearCart } from '../redux/actions/cart';
-import emptyCartImage from "../assets/img/empty-cart.png";
+import { clearCart, removeCartItem } from '../redux/actions/cart';
+import emptyCartImage from '../assets/img/empty-cart.png';
 
 function Cart() {
   const dispatch = useDispatch();
@@ -13,6 +13,12 @@ function Cart() {
   const addedPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
   });
+
+  const onRemoveItem = (id) => {
+    if (window.confirm('Вы действительно хотите удалить?')) {
+      dispatch(removeCartItem(id));
+    }
+  };
 
   const onClearCart = () => {
     if (window.confirm('Вы действительно хотите очистить корзину?')) {
@@ -100,11 +106,13 @@ function Cart() {
             <div className='content__items'>
               {addedPizzas.map((obj) => (
                 <CartItem
+                  id={obj.id}
                   name={obj.name}
                   type={obj.type}
                   size={obj.size}
                   totalPrice={items[obj.id].totalPrice}
                   totalCount={items[obj.id].items.length}
+                  onRemove={onRemoveItem}
                 />
               ))}
             </div>
