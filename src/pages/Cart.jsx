@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { CartItem } from '../components/';
-import { clearCart, removeCartItem } from '../redux/actions/cart';
+import {
+  clearCart,
+  removeCartItem,
+  plusCartItem,
+  minusCartItem,
+} from '../redux/actions/cart';
 import emptyCartImage from '../assets/img/empty-cart.png';
 
 function Cart() {
@@ -24,6 +29,14 @@ function Cart() {
     if (window.confirm('Вы действительно хотите очистить корзину?')) {
       dispatch(clearCart());
     }
+  };
+
+  const onPlusItem = (id) => {
+    dispatch(plusCartItem(id));
+  };
+
+  const onMinusItem = (id) => {
+    dispatch(minusCartItem(id));
   };
 
   return (
@@ -113,6 +126,8 @@ function Cart() {
                   totalPrice={items[obj.id].totalPrice}
                   totalCount={items[obj.id].items.length}
                   onRemove={onRemoveItem}
+                  onMinus={onMinusItem}
+                  onPlus={onPlusItem}
                 />
               ))}
             </div>
@@ -126,8 +141,8 @@ function Cart() {
                 </span>
               </div>
               <div className='cart__bottom-buttons'>
-                <a
-                  href='/'
+                <Link
+                  to='/'
                   className='button button--outline button--add go-back-btn'>
                   <svg
                     width='8'
@@ -143,9 +158,9 @@ function Cart() {
                       strokeLinejoin='round'
                     />
                   </svg>
-
                   <span>Вернуться назад</span>
-                </a>
+                </Link>
+
                 <div className='button pay-btn'>
                   <span>Оплатить сейчас</span>
                 </div>
