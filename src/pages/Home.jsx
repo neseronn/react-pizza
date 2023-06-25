@@ -27,15 +27,15 @@ function Home() {
 
   React.useEffect(() => {
     dispatch(fetchPizzas(category, sortBy));
-  }, [category, sortBy]);
+  }, [category, sortBy]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSelectCategory = React.useCallback((index) => {
     dispatch(setCategory(index));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSelectSort = React.useCallback((type) => {
     dispatch(setSortBy(type));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAddPizzaToCart = (obj) => {
     dispatch(addPizzaToCart(obj));

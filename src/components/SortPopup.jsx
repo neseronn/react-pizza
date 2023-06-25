@@ -14,17 +14,15 @@ const SortPopup = React.memo(function SortPopup({
     setVisiblePopup(!visiblePopup);
   };
 
-  const handleOutsideClick = (e) => {
-    // if (!e.path.includes(sortRef.current)) {
-    //   setVisiblePopup(false);
-    // }
-    if (!sortRef.current.contains(e.target)) {
+  const handleOutsideClick = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+    if (!path.includes(sortRef.current)) {
       setVisiblePopup(false);
     }
   };
 
   const onSelectItem = (index) => {
-    if(onClickSort) {
+    if (onClickSort) {
       onClickSort(index);
     }
     setVisiblePopup(false);

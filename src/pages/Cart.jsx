@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { CartItem } from '../components/';
+import { Button, CartItem } from '../components/';
 import {
   clearCart,
   removeCartItem,
@@ -37,6 +37,10 @@ function Cart() {
 
   const onMinusItem = (id) => {
     dispatch(minusCartItem(id));
+  };
+
+  const onClickOrder = () => {
+    console.log('Ваш заказ', items);
   };
 
   return (
@@ -119,6 +123,7 @@ function Cart() {
             <div className='content__items'>
               {addedPizzas.map((obj) => (
                 <CartItem
+                  key={obj.id}
                   id={obj.id}
                   name={obj.name}
                   type={obj.type}
@@ -161,16 +166,16 @@ function Cart() {
                   <span>Вернуться назад</span>
                 </Link>
 
-                <div className='button pay-btn'>
+                <Button onClick={onClickOrder} className='pay-btn'>
                   <span>Оплатить сейчас</span>
-                </div>
+                </Button>
               </div>
             </div>
           </div>
         ) : (
           <div className='cart cart--empty'>
             <h2>
-              Корзина пустая <icon>😕</icon>
+              Корзина пустая <i>😕</i>
             </h2>
             <p>
               Вероятней всего, вы не заказывали ещё пиццу.
